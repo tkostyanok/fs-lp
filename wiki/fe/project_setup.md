@@ -280,3 +280,131 @@ or
 ```
 
 Lint stages [docs](https://github.com/lint-staged/lint-staged)
+
+
+
+## 10. [Optional] `@loadable/component`
+
+`@loadable/component` is a library for dynamically loading components in a React application. It helps reduce the initial bundle size by loading components only when they are needed. This is especially useful for improving the performance of large applications.
+
+### Install `@loadable/component`
+```
+npm install @loadable/component
+```
+
+### Update `vite-env.d.ts`
+
+Extend Vite's module resolution to include '@loadable/component'
+
+```
+declare module '@loadable/component';
+```
+
+### Using `@loadable/component`
+
+```
+import React from 'react';
+import loadable from '@loadable/component';
+
+const MyComponent = loadable(() => import('./MyComponent'));
+
+const App = () => (
+  <div>
+    <h1>Hello, World!</h1>
+    <MyComponent />
+  </div>
+);
+
+export default App;
+```
+
+In the example above, the `MyComponent` component will only be loaded when needed, rather than when the application first loads.
+
+### Handling Loading State
+
+When dynamically loading components, there may be a delay. To provide feedback to the user that the component is loading, we can add a loading component.
+
+```
+import React from 'react';
+import loadable from '@loadable/component';
+
+const Loading = () => <div>Loading...</div>;
+
+const MyComponent = loadable(() => import('./MyComponent'), {
+  fallback: <Loading />,
+});
+
+const App = () => (
+  <div>
+    <h1>Hello, World!</h1>
+    <MyComponent />
+  </div>
+);
+
+export default App;
+```
+
+### Using `@loadable/server` for SSR
+
+`@loadable/component` also provides the `@loadable/server` module to handle component loading on the server side.
+
+First, install the `@loadable/server` module:
+
+```
+npm install @loadable/server
+```
+
+Example of how to use it in an SSR application:
+
+```
+// server.js
+import path from 'path';
+import fs from 'fs';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import express from 'express';
+import { ChunkExtractor } from '@loadable/server';
+import App from './src/App';
+
+const app = express();
+
+app.use(express.static(path.resolve(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  const statsFile = path.resolve('./build/loadable-stats.json');
+  const extractor = new ChunkExtractor({ statsFile });
+
+  const jsx = extractor.collectChunks(<App />);
+  const html = ReactDOMServer.renderToString(jsx);
+
+  const template = fs.readFileSync(path.resolve('./build/index.html'), 'utf8');
+  const finalHtml = template.replace('<div id="root"></div>', `<div id="root">${html}</div>`);
+
+  res.send(finalHtml);
+});
+
+app.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});
+```
+
+### Optimization with `@loadable/babel-plugin`
+
+This plugin will automatically add IDs to dynamically loaded components so that `@loadable/server` can work more efficiently.
+
+Install the Babel plugin:
+
+```
+npm install @loadable/babel-plugin
+```
+
+Add plugin to Babel configuration:
+
+```
+{
+  "plugins": ["@loadable/babel-plugin"]
+}
+```
+
+
+

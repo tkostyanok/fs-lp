@@ -3,7 +3,7 @@
 ## Main Dependencies
   - [@emotion/react]() - 
   - [@emotion/styled]() - 
-  - [@loadable/component]() - 
+  - [@loadable/component](https://github.com/gregberge/loadable-components) - allow to load components dynamic and give another way to make code splitting for app bundle.
   - [@mui/icons-material]() - 
   - [@mui/joy]() - 
   - [@mui/material]() - 
