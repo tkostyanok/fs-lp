@@ -1,4 +1,4 @@
-## Test project # 1
+## Test project # 1 - Material UI
 
 - Stack:
    - React  (v 19)
@@ -7,22 +7,11 @@
     - Material UI (v. 7.1.2)
     - Joy UI
 
-- Test Mui Tables:
-    - [Table from MUI](https://mui.com/material-ui/react-table/)
-    - [Table from Joy UI](https://mui.com/joy-ui/react-table/)
-    - Custom MUI Table based on MUI components
-  
-- What can be test:
 
-  - Read data:
-    - from local file
-    - from server
-  - Show data in table
-  - Allow add/delete/modify data
-  - Allow filter data
-  
-  
-  ...
-  Additional ideas will be add later :)
+- Goal:
 
-  
+  Build a dashboard page that shows a table/list of people. Users can add a person
+  (new entries appear at the beginning of the list), edit or delete existing people, 
+  and filter the list (search, attribute filters). The component should be accessible, 
+  test-covered, and integrate with the app's state or backend API.
+
