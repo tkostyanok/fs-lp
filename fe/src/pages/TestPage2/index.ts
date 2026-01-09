@@ -1,1 +1,0 @@
-export { TestPage2 as default } from './TestPage2';

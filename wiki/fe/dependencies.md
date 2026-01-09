@@ -1,8 +1,11 @@
 # Dependencies
 
 ## Main Dependencies
-  - [@emotion/react]() - 
-  - [@emotion/styled]() - 
+
+  - [@emotion/react](https://www.npmjs.com/package/@emotion/react) - Simple styling in React.
+  - [@emotion/styled](https://www.npmjs.com/package/@emotion/styled) - styled API for emotion.
+  
+  -> https://emotion.sh/docs/introduction
   - [@loadable/component](https://github.com/gregberge/loadable-components) - allow to load components dynamic and give another way to make code splitting for app bundle.
   - [@mui/icons-material]() - 
   - [@mui/joy]() - 

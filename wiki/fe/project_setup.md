@@ -128,7 +128,7 @@ Edit `tsconfig.app.json` and `tsconfig.node.json`:
     },
 ```
 
-Paths can be different and depends from projects
+Paths can be different and depends from projects.
 
 
 
@@ -406,5 +406,34 @@ Add plugin to Babel configuration:
 }
 ```
 
+## 11. [Optional] `Emotion`
 
+[Emotion](https://emotion.sh/docs/introduction) is a library designed for writing css styles with JavaScript. It provides powerful and predictable style composition in addition to a great developer experience with features such as source maps, labels, and testing utilities. Both string and object styles are supported.
+
+### Install `emotion`
+
+```
+npm install @emotion/react @emotion/styled
+```
+
+### Using `emotion`
+
+```
+import styled from '@emotion/styled'
+
+let SomeComp = styled.div({
+  color: 'hotpink'
+})
+
+let AnotherComp = styled.div`
+  color: ${props => props.color};
+`
+
+render(
+  <SomeComp>
+    <AnotherComp color="green" />
+  </SomeComp>
+)
+
+```
 

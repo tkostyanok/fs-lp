@@ -1,10 +1,9 @@
 import { Link } from 'react-router';
 
-export const TestPage2 = () => {
-
+export const AntDesign = () => {
   return (
     <>
-      <div>Test Page 2</div>
+      <div>Ant Design</div>
       <Link to='/'>Home</Link>
     </>
   );
