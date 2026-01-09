@@ -1,0 +1,1 @@
+export { MaterialUI as default } from './MaterialUI';

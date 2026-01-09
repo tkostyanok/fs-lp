@@ -1,0 +1,1 @@
+export { MuiTable as default }  from './MuiTable';

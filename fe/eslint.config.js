@@ -60,6 +60,13 @@ export default defineConfig([
       '@stylistic/object-curly-spacing': ['error', 'always', { 'arraysInObjects': false }],
       '@stylistic/object-property-newline': 'error',
 
+      // Rule: https://eslint.org/docs/latest/rules/no-restricted-imports
+      'no-restricted-imports': [
+        'error',
+        {
+          'patterns': [{ 'regex': '^@mui/[^/]+$' }]
+        }
+      ],
 
       'react-refresh/only-export-components': [
         'warn',

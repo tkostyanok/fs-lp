@@ -16,6 +16,7 @@
       // 'layouts': '/src/layouts',
       // 'pages': '/src/pages',
       // 'services': '/src/services',
+      // "app-mui": ["./src/pages/MaterialUI"],
     },
 
     /* Bundler mode */
