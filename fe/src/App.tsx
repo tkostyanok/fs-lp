@@ -8,7 +8,7 @@ const NotFound = loadable(() => import('./pages/NotFound'));
 const AntDesign = loadable(() => import('./pages/AntDesign'));
 
 const MaterialUI = loadable(() => import('./pages/MaterialUI'));
-const MuiTable= loadable(() => import('./pages/MaterialUI/components/Organisms/MuiTable'));
+const MuiTable= loadable(() => import('./pages/MaterialUI/components/Organisms/MuiTableDashboard'));
 const MuiCards= loadable(() => import('./pages/MaterialUI/components/Organisms/MuiCards'));
 
 const App = () => {

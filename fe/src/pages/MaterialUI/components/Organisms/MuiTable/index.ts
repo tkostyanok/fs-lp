@@ -1,1 +1,1 @@
-export { MuiTable as default }  from './MuiTable';
+export * from './MuiTable';

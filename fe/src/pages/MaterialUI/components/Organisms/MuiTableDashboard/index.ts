@@ -1,0 +1,1 @@
+export { MuiTableDashboard as default } from './MuiTableDashboard';
