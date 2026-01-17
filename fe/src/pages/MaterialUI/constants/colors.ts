@@ -1,4 +1,6 @@
-import { blue, grey, indigo, purple } from '@mui/material/colors';
+import {
+  blue, grey, indigo, purple 
+} from '@mui/material/colors';
 
 /**
  * App colors

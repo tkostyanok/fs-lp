@@ -3,12 +3,12 @@ import {
   useEffect, useMemo, useState 
 } from 'react';
 
-import {
-  type AutocompleteChangeReason, useMediaQuery, useTheme 
-} from '@mui/material';
+import{ type AutocompleteChangeReason } from '@mui/material/Autocomplete';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { BasicAutocomplete } from 'src/pages/MaterialUI/components/Atoms';
 import { useMaterialUIContext } from 'src/pages/MaterialUI/context';

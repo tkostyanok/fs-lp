@@ -15,9 +15,9 @@ import {
 } from 'src/pages/MaterialUI/components/Modals';
 import { TopToolbar } from 'src/pages/MaterialUI/components/Molecules';
 import { MuiTable } from 'src/pages/MaterialUI/components/Organisms/MuiTable';
-
 import { useMaterialUIContext } from 'src/pages/MaterialUI/context';
 import type { IMarvelHeroesDataTable } from 'src/pages/MaterialUI/interfaces';
+
 import { headerCells } from './utils';
 
 export const MuiTableDashboard = () => {

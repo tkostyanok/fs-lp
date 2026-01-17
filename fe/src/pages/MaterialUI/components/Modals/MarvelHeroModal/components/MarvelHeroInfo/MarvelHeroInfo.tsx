@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 import {
   BasicInput, BasicSelect 
 } from 'src/pages/MaterialUI/components/Atoms';
-
 import type { IMarvelHeroesData } from 'src/pages/MaterialUI/interfaces';
 
 import type { MarvelHeroInfoProps } from './MarvelHeroInfoProps';

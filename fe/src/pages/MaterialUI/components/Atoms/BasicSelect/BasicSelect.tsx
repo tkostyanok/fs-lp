@@ -3,9 +3,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { type SelectProps } from '@mui/material/Select';
 
 import { BasicLabel } from '../BasicLabel';
-import { BasicSelectLoading } from './BasicSelectLoading';
 
-import type { BasicSelectProps, ISelectOption } from './BasicSelectProps';
+import { BasicSelectLoading } from './BasicSelectLoading';
+import type {
+  BasicSelectProps, ISelectOption 
+} from './BasicSelectProps';
 
 /**
  * Basic select component.

@@ -1,8 +1,7 @@
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ChatIcon from '@mui/icons-material/Chat';
 import HomeIcon from '@mui/icons-material/Home';
@@ -10,8 +9,8 @@ import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 
-import { MenuListItem } from 'src/pages/MaterialUI/components/Molecules/MenuListItem';
 import { PRIMARY_BACKGROUND_COLOR } from 'src/pages/MaterialUI//constants/colors';
+import { MenuListItem } from 'src/pages/MaterialUI/components/Molecules/MenuListItem';
 
 const DRAWER_WIDTH = 200;
 

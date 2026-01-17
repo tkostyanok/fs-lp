@@ -1,5 +1,8 @@
+import {
+  Route, Routes 
+} from 'react-router';
+
 import loadable from '@loadable/component';
-import { Route, Routes } from 'react-router';
 
 import { AppLayout } from './layouts';
 
@@ -12,12 +15,12 @@ const MuiTable= loadable(() => import('./pages/MaterialUI/components/Organisms/M
 const MuiCards= loadable(() => import('./pages/MaterialUI/components/Organisms/MuiCards'));
 
 const App = () => {
-  const RoutesComponents = () => {
-    return (
+  return (
+    <AppLayout>
       <Routes>
         <Route index element={<Home />} />
 
-        <Route element={<MaterialUI />} >
+        <Route element={<MaterialUI />}>
           <Route path='/material-ui/table' element={<MuiTable />} />
           <Route path='/material-ui/cards' element={<MuiCards />} />
         </Route>
@@ -25,12 +28,7 @@ const App = () => {
         <Route path='/ant-design' element={<AntDesign />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-    );
-  };
-  return (
-	  <AppLayout>
-      <RoutesComponents />
-	  </AppLayout>
+    </AppLayout>
   );
 };
 

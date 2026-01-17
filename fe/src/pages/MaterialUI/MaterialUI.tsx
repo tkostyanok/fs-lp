@@ -1,14 +1,12 @@
 import { Outlet } from 'react-router';
-import { ThemeProvider as MaterialTM } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
+import { ThemeProvider as MaterialTM } from '@mui/material/styles';
 
 import { DashboardMenu } from 'src/pages/MaterialUI/components/Organisms';
-
 import { MaterialUIProvider } from 'src/pages/MaterialUI/context';
-
-import muiTheme from 'src/pages/MaterialUI/styles/mui-theme';
 import { mockData } from 'src/pages/MaterialUI/data/mockData';
+import muiTheme from 'src/pages/MaterialUI/styles/mui-theme';
 
 /**
  * @returns MaterialUI page.

@@ -7,8 +7,7 @@ import {
   useState 
 } from 'react';
 
-import { v4 } from 'uuid';
-
+import { DeleteHeroButton } from 'src/pages/MaterialUI/components';
 import type { 
   DataUsage,
   Gender,
@@ -16,12 +15,10 @@ import type {
   IMarvelHeroesDataTable,
   MarvelHeroFilterValues
 } from 'src/pages/MaterialUI/interfaces';
+import { ensureStringArray } from 'src/pages/MaterialUI/utils';
+import { v4 } from 'uuid';
 
 import { MaterialUIContext } from './MaterialUIContext';
-
-import { DeleteHeroButton } from 'src/pages/MaterialUI/components';
-
-import { ensureStringArray } from 'src/pages/MaterialUI/utils';
 import {
   initialFiltersData,
   initialMarvelHero 
@@ -110,7 +107,7 @@ export const MaterialUIProvider = ({
   // Create or Update data remotely
   const handleSaveDataRemote = async () => {
     console.log('Some code will be implemented here for remote data saving');
-  }
+  };
 
   // Filter data based on current filters
   const {
@@ -216,7 +213,9 @@ export const MaterialUIProvider = ({
     setSelectedData,
   };
 
-  return <MaterialUIContext.Provider value={contextValue}>
-    {children}
-    </MaterialUIContext.Provider>;
+  return (
+    <MaterialUIContext.Provider value={contextValue}>
+      {children}
+    </MaterialUIContext.Provider>
+  );
 };

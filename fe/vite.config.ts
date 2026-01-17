@@ -1,9 +1,11 @@
 
 
-import { defineConfig as defineViteConfig, mergeConfig } from 'vite';
+import path from 'path';
+import {
+  defineConfig as defineViteConfig, mergeConfig 
+} from 'vite';
 import { defineConfig as defineVitestConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 
 // https://vite.dev/config/
 const viteConfig = defineViteConfig({

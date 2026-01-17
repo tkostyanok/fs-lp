@@ -2,7 +2,7 @@ import type {
   MouseEvent, SyntheticEvent 
 } from 'react';
 import {
-  useMemo, useState 
+  useCallback, useMemo, useState 
 } from 'react';
 
 import Box from '@mui/material/Box';
@@ -14,15 +14,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import { MuiTableHeader } from './components';
-
 import {
   GREY_50, GREY_200, GREY_600 
 } from 'src/pages/MaterialUI/constants/colors';
 import type { Order } from 'src/pages/MaterialUI/interfaces';
-import { getComparator } from './utils';
 
+import { MuiTableHeader } from './components';
 import type { MuiTableProps } from './MuiTableProps';
+import { getComparator } from './utils';
 
 /**
  * MuiTable displays a `MUI Table` component.
@@ -39,7 +38,10 @@ export const MuiTable = <T extends object>({
   const [ page, setPage ] = useState(0);
   const [ rowsPerPage, setRowsPerPage ] = useState(10);
 
-  const headerCellsMap = headerCells.map((cell) => cell.field);
+  const headerCellsMap = useMemo(
+    () => headerCells.map((cell) => cell.field),
+    [ headerCells ],
+  );
   
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -58,6 +60,17 @@ export const MuiTable = <T extends object>({
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+
+  const handleRowClick = useCallback(
+    (row: T) => (event: SyntheticEvent) => {
+      const target = event.target as HTMLElement;
+
+      if (target.closest('button') || target.closest('a')) return;
+      
+      onRowClick?.(row);
+    },
+    [ onRowClick ],
+  );
 
   
   //  Avoid a layout jump when reaching the last page with empty rows.
@@ -104,17 +117,7 @@ export const MuiTable = <T extends object>({
                   <TableRow
                     hover
                     key={`table-row-${rowIndex}`}
-                    onClick={(event: SyntheticEvent) => {
-                      const target = event.target as HTMLElement;
-                      
-                      if (target.closest('button') || target.closest('a')) {
-                        return;
-                      }
-
-                      if (onRowClick) {
-                        onRowClick(rowData);
-                      }
-                    }}
+                    onClick={handleRowClick(rowData)}
                     sx={{ 
                       cursor: 'pointer',
                       '&:nth-of-type(even)': {
@@ -142,13 +145,15 @@ export const MuiTable = <T extends object>({
                             }}
                           >
                             {
-                              rowData[key as keyof T] !== null 
-                                ? typeof rowData[key as keyof T] === 'string'
-                                  ?`${rowData[key as keyof T]}` 
-                                  : typeof rowData[key as keyof T] === 'object'
-                                    ? rowData[key as keyof T] as React.ReactNode
-                                    : '-'
-                                : '-'
+                              (() => {
+                                const cellValue = rowData[key as keyof T];
+                                if (cellValue === null || cellValue === undefined) return '-';
+                                if (typeof cellValue === 'string' || typeof cellValue === 'number') {
+                                  return String(cellValue);
+                                }
+                                // Only allow ReactNodes explicitly passed by the caller; avoid HTML strings
+                                return (cellValue as React.ReactNode) ?? '-';
+                              })()
                             }
                           </TableCell>
                         );

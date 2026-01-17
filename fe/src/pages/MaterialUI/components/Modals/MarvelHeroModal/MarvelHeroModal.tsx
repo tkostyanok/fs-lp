@@ -3,11 +3,10 @@ import type {
 } from 'react';
 import { useState } from 'react';
 
-import {
-  useMediaQuery, useTheme 
-} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import type { IMarvelHeroesDataTable } from 'src/pages/MaterialUI/interfaces';
 import {
@@ -43,10 +42,12 @@ export const MarvelHeroModal = ({
       name: string } }),
   ) => {
     const target = event.target as HTMLInputElement;
+    const name = target.name;
+    const value = target.value;
 
     setHeroFilterValues((prevValues: IMarvelHeroesDataTable) => ({
       ...prevValues,
-      [target.name]: target.value,
+      [name]: value,
     }));
     setIsDataChanged(true);
   };
@@ -70,6 +71,8 @@ export const MarvelHeroModal = ({
       ...modifiedValues,
       id: data?.id || null,
     });
+
+    setIsDataChanged(false);
     onClose();
   };
 
