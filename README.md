@@ -5,8 +5,8 @@ Full stack learning project to build app with React and Node.js
 
 ### Projects
 
-- [Test project 1](/wiki/projects/test_project_1.md)
-- [Test project 2](/wiki/projects/test_project_2.md)
+- [Material UI](/wiki/projects/material_ui.md)
+- [Ant design](/wiki/projects/ant_design.md)
 
 ## DOCs
 

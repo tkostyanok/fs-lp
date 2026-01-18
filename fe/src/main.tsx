@@ -12,4 +12,4 @@ createRoot(document.getElementById('root') as Element).render(
       <App />
     </BrowserRouter>
   </StrictMode>,
-)
+);

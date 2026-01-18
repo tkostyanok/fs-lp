@@ -41,58 +41,117 @@ Having done that, any developer can just run `nvm use` in the project folder and
 
 ## 4. Install testing libraries to project
 
+### Install packages
+
 ```
 npm install -D vitest
-npm install -D @testing-library/react @testing-library/jest-dom jsdom
+npm install -D @testing-library/react @testing-library/dom @testing-library/jest-dom jsdom
 ```
 
-  1. `@testing-library/react` -> for component testing
-  2. `@testing-library/jest-dom` -> for DOM assertions
-  3. `jsdom` -> for simulating a browser environment in Node for testing purposes
+To get full type coverage, you need to install the **types** for `react` and `react-dom` as well:
+```
+npm install -D @types/react @types/react-dom
+```
+
+Packages: 
+- `vitest` -> testing framework powered by `Vite`.
+- `jsdom` -> for simulating a browser environment in Node for testing purposes. Required dependency.
+- `@testing-library/react` -> for component testing. [Docs](https://testing-library.com/)
+- `@testing-library/jest-dom` -> for component testing, for DOM assertions.
+- `@types/react` -
+- `@types/react-dom` - 
+
+**Note:** `Vitest` requires `Vite` **>=v6.0.0** and `Node` **>=v20.0.0**
 
 
-Update a `vite.config.ts` file with next configuration:
-  ```js
-    import { defineConfig as defineViteConfig, mergeConfig } from 'vite';
-    import { defineConfig as defineVitestConfig } from 'vitest/config';
-    import react from '@vitejs/plugin-react';
+### Update a `vite.config.ts`:
 
-    const viteConfig = defineViteConfig({
-      plugins: [ react() ],
-    });
+```js
+import { defineConfig as defineViteConfig, mergeConfig } from 'vite';
+import { defineConfig as defineVitestConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
 
-    const vitestConfig = defineVitestConfig({
-      test: {
-        globals: true,
-        environment: 'jsdom'
-      },
-    });
+const viteConfig = defineViteConfig({
+  plugins: [ react() ],
+});
 
-    export default mergeConfig(viteConfig, vitestConfig);
+const vitestConfig = defineVitestConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom'
+  },
+});
 
-  ```
+export default mergeConfig(viteConfig, vitestConfig);
+```
 
-Reason to modify `vite.config.ts`: Vite config interface does not 
-  know anything about Vitest and TS does not allow excessive properties 
-  (properties not defined by the type/interface). So Vitest must extend 
-  Vite config (defined as TS interface). React has conflict in configuration 
-  file if switch `config` import from `vite` to `vitest` and for this 
-  reason better to use renamed imports.
+**Note:** Reason to modify `vite.config.ts`: Vite config interface does not 
+know anything about Vitest and TS does not allow excessive properties 
+(properties not defined by the type/interface). So Vitest must extend 
+Vite config (defined as TS interface). React has conflict in configuration 
+file if switch `config` import from `vite` to `vitest` and for this 
+reason better to use renamed imports.
 
-Additional info about Vitest: https://vitest.dev/config/file.html
+### Update `package.json`
+
+```
+"scripts": {
+  ...
+  "test": "vitest"
+},
+```
+
+### Add `setupTests.ts` to `src` folder
+
+```
+import * as matchers from '@testing-library/jest-dom/matchers';
+import { expect } from 'vitest';
+
+expect.extend(matchers);
+```
+
+### Writing tests
+
+`sum.js`
+```
+export function sum(a, b) {
+  return a + b
+}
+```
+
+`sum.test.js`
+
+```
+import { expect, test } from 'vitest'
+import { sum } from './sum.js'
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3)
+})
+```
+
+### Run tests
+
+```
+npm run test
+```
+
+Additional info about `Vitest` in [docs](https://vitest.dev/guide/).
 
 
 
 ## 5. Check that project have a tsconfig.json..
 
 .. (or **jsconfig.json**) to be sure that LSP - Language Service Protocol 
-  (as VSCode, Sublime Text, etc.) - with allow LSP to recognize all 
-  project files. 
-  For more details read [doc](https://code.visualstudio.com/docs/languages/jsconfig#_why-do-i-need-a-jsconfigjson-file).
+(as VSCode, Sublime Text, etc.) - with allow LSP to recognize all 
+project files. 
+For more details read [doc](https://code.visualstudio.com/docs/languages/jsconfig#_why-do-i-need-a-jsconfigjson-file).
 
 
 
-## 6. [Optional] Relative Paths imports to project
+## 6. [Optional] Relative Paths imports to project 
+
+**[!! Dos't work in current version. Need to check!!]**
 
 Edit `vite.config.js`:
 
@@ -437,3 +496,37 @@ render(
 
 ```
 
+
+## 12. [Optional] `Lodash`
+
+`Lodash` is a modern JavaScript utility library, which cover common manipulation programming for arrays, objects, string, and collections using functional programming paradigm.
+
+### Install `lodash`
+
+```
+npm install lodash
+npm install --save-dev @types/lodash
+```
+
+### Using `lodash`
+
+**Instead of importing the whole `lodash` library, it's a best practice to import specific methods inside your file to keep the smallest bundle size.**
+
+```
+import sortBy from 'lodash/sortBy';
+
+
+function SortedList({ items }) {
+  const sortedItems = sortBy(items, 'name');
+
+  return (
+    <ul>
+      {sortedItems.map(item => <li key={item.id}>{item.name}</li>)}
+    </ul>
+  );
+}
+```
+
+### Is Lodash Needed in app?
+
+It depends. It's true that many features `lodash` offers are now available in native JavaScript, but at the same time `lodash` still provides a consistent and well-tested suite of utility functions that can be more readable and sometimes more performant than their native counterparts.

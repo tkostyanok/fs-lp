@@ -1,32 +1,37 @@
 # Dependencies
 
 ## Main Dependencies
-
   - [@emotion/react](https://www.npmjs.com/package/@emotion/react) - Simple styling in React.
   - [@emotion/styled](https://www.npmjs.com/package/@emotion/styled) - styled API for emotion.
-  
-  -> https://emotion.sh/docs/introduction
-  - [@loadable/component](https://github.com/gregberge/loadable-components) - allow to load components dynamic and give another way to make code splitting for app bundle.
+    -> [docs](https://emotion.sh/docs/introduction)
+  - [@loadable/component](https://github.com/gregberge/loadable-components) - allow to load components dynamic 
+      and give another way to make code splitting for app bundle.
   - [@mui/icons-material]() - 
   - [@mui/joy]() - 
   - [@mui/material]() - 
   - [@mui/x-data-grid]() - 
-  - [axios]() - 
-  - [dotenv](https://www.npmjs.com/package/dotenv) - is a zero-dependency module that loads environment variables from 
-      a .env file into process.env.
-  - [lodash]() - 
+  - [axios](https://axios-http.com/) - Promise based HTTP client for the browser and node.js.
+  - [dotenv](https://www.npmjs.com/package/dotenv) - is a zero-dependency module that loads environment 
+      variables from a `.env` file into process.env.
+  - [lodash](https://lodash.com/) or [docs from npmjs](https://www.npmjs.com/package/lodash) - A modern JavaScript 
+      utility library, which cover common manipulation programming for arrays, objects, string, and collections
+      using functional programming paradigm.
   - [react](https://react.dev/) - JavaScript library for creating user interfaces.
   - [react-dom](https://react.dev/) - React package for working with the DOM.
-  - [uuid]() - 
+  - [uuid](https://github.com/uuidjs/uuid) - UUID generator
 
 ## Dev Dependencies
 
   - [@eslint/js]() - 
-  - [@stylistic/eslint-plugin]() - 
-  - [@testing-library/jest-dom]() - 
-  - [@testing-library/react]() - 
-  - [@types/jest]() - 
-  - [@types/lodash]() - 
+  - [@stylistic/eslint-plugin]() -
+    [@testing-library/jest-dom](https://www.npmjs.com/package/@testing-library/jest-dom) -provides a set of 
+      custom jest matchers that you can use to extend jest. These will make your tests more declarative, clear 
+      to read and to maintain.
+    [@testing-library/react](https://testing-library.com/) - is a very light-weight solution for testing React
+      components. It provides light utility functions on top of `react-dom` and `react-dom/test-utils`, in a way
+      that encourages better testing practices.
+    [@types/node]() -
+  - [@types/lodash](https://www.npmjs.com/package/@types/lodash) - This package contains type definitions for `lodash`.
   - [@types/react]() - 
   - [@types/react-dom]() - 
   - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) 
@@ -50,7 +55,6 @@
       browser to be useful for testing and scraping real-world web applications. 
   - [lint-staged]() - 
   - [prettier]() - 
-  - [ts-jest]() - 
   - [typescript](https://www.typescriptlang.org/) - is a language for application-scale
       JavaScript. TypeScript adds optional types to JavaScript.
   - [typescript-eslint]() - 
