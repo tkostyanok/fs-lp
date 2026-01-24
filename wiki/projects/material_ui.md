@@ -29,6 +29,8 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
 ```
 
+**Import in Browser**
+
 **Fonts** ->  documentation says next: _`Material UI` uses the `Roboto font` by default. Add it to your project's `<head />` tag._
 
 ```

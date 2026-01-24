@@ -2,7 +2,7 @@
 
 import path from 'path';
 import {
-  defineConfig as defineViteConfig, mergeConfig 
+  defineConfig as defineViteConfig, mergeConfig
 } from 'vite';
 import { defineConfig as defineVitestConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
