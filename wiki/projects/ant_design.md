@@ -1,8 +1,8 @@
-## Test project # 2 - And Design
+## And Design
 
 ## Goal:
 
-Build a beautiful nutrition management platform with dual dashboards.
+Build a beautiful nutrition management platform with dual dashboards using AntDesign component library.
 
 Features for v1:
 - Nutritionist dashboard: 
@@ -33,7 +33,7 @@ and  with backend API (for remote test).
 - [Ant Design](https://ant.design/)
   
 
-## Instruction for some packages installation
+## Instruction for some packages installation:
 
 **Note:** part of instructions about packages installation available in [fe -> project_setup](../fe/project_setup.md).
 

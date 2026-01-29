@@ -2,7 +2,7 @@ import { type SelectProps } from '@mui/material/Select';
 
 export interface ISelectOption {
   title: string;
-  value: boolean | number | string;
+  value: number | string;
 }
 
 export interface BasicSelectProps<T extends object> extends Omit<SelectProps, 'label' | 'name'> {

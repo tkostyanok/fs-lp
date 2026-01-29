@@ -1,11 +1,12 @@
-# Project #1 - Testing `Material UI`
+## Material UI
 
 ## Goal:
 
-Build a dashboard page that shows a table/list of people. Users can add a person
-(new entries appear at the beginning of the list), edit or delete existing people, 
-and filter the list (search, attribute filters). The component should be accessible, 
-test-covered, and integrate with the app's state or backend API.
+Build a dashboard pages that show a table/list of people using Material UI component
+library. Users can add a person (new entries appear at the beginning of the list),
+edit or delete existing people, and filter the list (search, attribute filters). 
+The component should be accessible, test-covered, and integrate with the app's state 
+(for local test) and with backend API.
 
 ## Stack:
 

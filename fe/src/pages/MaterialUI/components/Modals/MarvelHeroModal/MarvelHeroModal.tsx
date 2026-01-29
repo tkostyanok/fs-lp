@@ -66,7 +66,6 @@ export const MarvelHeroModal = ({
     }
     // TODO: Add error handling
     // TODO: new hero , validate required fields
-    // TODO: move id generation for new hero to context
     await onSave({
       ...modifiedValues,
       id: data?.id || null,
