@@ -40,11 +40,10 @@ export const BasicSelect = <T extends object>({
         {...props}
       >
         {options.map((option: ISelectOption) => {
-          // Only render MenuItem if value is string, number, or readonly string[]
+          // Only render MenuItem if value is string, number,
           if (
             typeof option.value === 'string' ||
-            typeof option.value === 'number' ||
-            (Array.isArray(option.value) && option.value.every(v => typeof v === 'string'))
+            typeof option.value === 'number'
           ) {
             return (
               <MenuItem

@@ -1,10 +1,11 @@
 import React from 'react';
 
 import {
-  describe, expect,it 
+  describe, expect, it
 } from 'vitest';
 import {
-  render, screen 
+  render, screen,
+  waitFor
 } from '@testing-library/react';
 
 import { InfoCard } from './InfoCard';
@@ -22,7 +23,7 @@ const FakeIcon: React.FC = () => <svg data-testid='fake-icon' />;
  *  - Card.Meta -> title, description
  */
 describe('InfoCard', () => {
-  it('should render title, meta title and meta description text', () => {
+  it('should render title, meta title and meta description text', async () => {
     render(
       <InfoCard
         Icon={FakeIcon}
@@ -33,14 +34,15 @@ describe('InfoCard', () => {
       />
     );
 
-    expect(screen.getByText('Test Card')).toBeInTheDocument();
-    expect(screen.getByText('Meta title')).toBeInTheDocument();
-    expect(screen.getByText('Some description')).toBeInTheDocument();
-
-    expect(screen.getByTestId('fake-icon')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Test Card')).toBeInTheDocument();
+      expect(screen.getByText('Meta title')).toBeInTheDocument();
+      expect(screen.getByText('Some description')).toBeInTheDocument();
+      expect(screen.getByTestId('fake-icon')).toBeInTheDocument();
+    });
   });
 
-  it('should apply the provided iconColor style to the icon wrapper', () => {
+  it('should apply the provided iconColor style to the icon wrapper', async () => {
     render(
       <InfoCard
         Icon={FakeIcon}
@@ -51,18 +53,20 @@ describe('InfoCard', () => {
       />
     );
 
-    const svg = screen.getByTestId('fake-icon');
-    // Note: antd Icon wraps provided component
-    const wrapper = svg.parentElement as HTMLElement;
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper).toHaveStyle({
-      color: '#abcdef',
-      fontSize: '32px' 
+    await waitFor(() => {
+      const svg = screen.getByTestId('fake-icon');
+      // Note: antd Icon wraps provided component
+      const wrapper = svg.parentElement as HTMLElement;
+      expect(wrapper).toBeInTheDocument();
+      expect(wrapper).toHaveStyle({
+        color: '#abcdef',
+        fontSize: '32px' 
+      });
     });
   });
 
   it(`should support ReactNode metaDescription (e.g., a Link) 
-        and apply apply inline style align-items: center to it`, () => {
+        and apply apply inline style align-items: center to it`, async () => {
     render(
       <InfoCard
         Icon={FakeIcon}
@@ -73,8 +77,10 @@ describe('InfoCard', () => {
       />
     );
 
-    const customNode = screen.getByTestId('custom-node');
-    expect(customNode).toBeInTheDocument();
-    expect(customNode).toHaveTextContent('Custom Node');
+    await waitFor(() => {
+      const customNode = screen.getByTestId('custom-node');
+      expect(customNode).toBeInTheDocument();
+      expect(customNode).toHaveTextContent('Custom Node');
+    });
   });
 });

@@ -1,6 +1,5 @@
 import type { Order } from 'src/pages/MaterialUI/interfaces';
 
-// TODO: tests
 export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -11,7 +10,6 @@ export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-// TODO: tests
 export function getComparator<T>(
   order: Order,
   orderBy: keyof T,
