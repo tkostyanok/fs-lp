@@ -1,26 +1,30 @@
 import { memo } from 'react';
-import { Link } from 'react-router';
 
 import { Menu } from 'antd';
-import {
-  AppstoreOutlined,
-  HomeOutlined,
-  ScheduleOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
 
-import {
-  getItem, MenuItem 
-} from './utils';
+import { MenuItems } from './MainMenuItems';
+import { MAIN_MENU_STYLES } from './MainMenuStyles';
 
 export const MainMenu = memo(() => {
-  /**
-   * Note: do not change key orders.
-   * Reason: Keys present in order how data should be shown in the Menu.
-   * 
-   * Note: another variant how to create Menu items shown in MainMenuItems.
-   */
+  return (
+    <Menu 
+      defaultSelectedKeys={[ 'nutritionist-dashboard' ]}
+      defaultOpenKeys={[ 'nutritionist' ]}
+      items={MenuItems}
+      mode='inline'
+      style={MAIN_MENU_STYLES.menu}
+    />
+  );
+});
+
+/**
+ * Note: another variant how to create Menu items.
+ * Note: 'divider' is not implemented.
+ * 
+ * Note: do not change key orders.
+ * Reason: Keys present in order how data should be shown in the Menu.
+ */
+/*
   const MENU_ITEMS: MenuItem[] = [
     getItem('home', <Link to='/'>Home</Link>, <HomeOutlined />),
     getItem('nutritionist', 'Nutritionist', <UserOutlined />, [
@@ -33,23 +37,10 @@ export const MainMenu = memo(() => {
       ),
       getItem('nutritionist-patients', <Link to='/ant-design/nutritionist/patients'>Patients</Link>, <TeamOutlined />),
       getItem('nutritionist-appointments', <Link to='/ant-design/nutritionist/appointments'>Appointments</Link>, <ScheduleOutlined />),
-      getItem('nutritionist-chat', <Link to='/ant-design/nutritionist/chat'>Chat</Link>),
+      getItem('nutritionist-chat', <Link to='/ant-design/nutritionist/chat'>Chat</Link>, <WechatOutlined />),
       getItem('nutritionist-settings', <Link to='/ant-design/nutritionist/settings'>Settings</Link>),
     ]),
     getItem('client', <Link to='/ant-design/client/dashboard'>Client</Link>, <UserOutlined />),
     getItem('admin', <Link to='/ant-design/admin/dashboard'>Admin</Link>, <TeamOutlined />),
   ];
-
-  return (
-    <Menu 
-      defaultSelectedKeys={[ 'nutritionist-dashboard' ]}
-      defaultOpenKeys={[ 'nutritionist' ]}
-      items={MENU_ITEMS}
-      mode='inline'
-      style={{
-        fontWeight: 500,
-      }}
-    />
-  );
-});
-
+*/

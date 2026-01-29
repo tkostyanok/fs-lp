@@ -6,6 +6,7 @@ import {
   ScheduleOutlined,
   TeamOutlined,
   UserOutlined,
+  WechatOutlined,
 } from '@ant-design/icons';
 
 import { MenuItem } from './utils';
@@ -37,7 +38,7 @@ export const MenuItems: MenuItem[] = [
     label: 'Nutritionist',
     children: [
       {
-        key: 'dashboard',
+        key: 'nutritionist-dashboard',
         icon: 
           <AppstoreOutlined
             style={{
@@ -47,21 +48,22 @@ export const MenuItems: MenuItem[] = [
         label: <Link to='/ant-design/nutritionist/dashboard'>Dashboard</Link>,
       },
       {
-        key: 'patients',
+        key: 'nutritionist-patients',
         icon: <TeamOutlined />,
         label: <Link to='/ant-design/nutritionist/patients'>Patients</Link>,
       },
       {
-        key: 'appointments',
+        key: 'nutritionist-appointments',
         icon: <ScheduleOutlined />,
         label: <Link to='/ant-design/nutritionist/appointments'>Appointments</Link>,
       },
       {
-        key: 'chat',
+        key: 'nutritionist-chat',
+        icon: <WechatOutlined />,
         label: <Link to='/ant-design/nutritionist/chat'>Chat</Link>,
       },
       {
-        key: 'settings',
+        key: 'nutritionist-settings',
         label: <Link to='/ant-design/nutritionist/settings'>Settings</Link>,
       },
     ],

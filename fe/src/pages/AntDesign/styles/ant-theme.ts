@@ -1,37 +1,37 @@
 import type { ThemeConfig } from 'antd';
-import { green } from '@ant-design/colors';
+import {
+  blue, green, orange 
+} from '@ant-design/colors';
 
-import { WHITE } from '../constants/colors';
+import { TRANSPARENT } from '../constants/colors';
 
 export const antTheme: ThemeConfig = {
-  "token": {
-    "colorPrimaryBorder": green[2],
-    "colorBgLayout": green[0],
-    "colorBgContainer": green[0],
-    // "colorBgHeader": WHITE,
-    "colorPrimary": green[7],
-    "colorInfo": green[7],
-    "colorLink": green[7],
-    "colorSuccess": green[7],
+  'token': {
+    // 'borderRadius': 8,
+    'colorPrimaryBorder': blue[7],
+    'colorBgLayout': blue[1],
+    // 'colorBgContainer': purple[0],
+    // 'colorBorderSecondary': purple[2],
+    // 'colorBgHeader': WHITE,
+    'colorPrimary': blue[7],
+    'colorInfo': blue[7],
+    // 'colorLink': green[7],
+    'colorSuccess': green[7],
+    'colorWarning': orange[6],
   },
-  "components": {
-    "Menu": {
-      "colorItemText": green[7],
-      "colorItemTextHover": green[7],
-      "colorItemTextSelected": WHITE,
-      "colorItemBgSelected": green[7],
-      "colorItemBgHover": green[2],
-      "itemBg": green[0],
-      "subMenuItemSelectedColor": green[7],
+  'components': {
+    'Menu': {
+      // 'itemColor': purple[7],
+      'itemHoverColor': blue[7],
+      // 'itemSelectedColor': blue[7],
+      'itemSelectedBg': blue[1],
+      'itemHoverBg': blue[0],
+      'itemBg': TRANSPARENT, // common background color for menu
+      'subMenuItemSelectedColor': blue[7],
     },
-    "Layout": {
-      "headerBg": green[0],
-      "siderBg": green[0],
+    'Layout': {
+      'headerBg': blue[0],
+      // 'siderBg': WHITE,
     },
-    "Slider": {
-      "handleColor": green[7],
-      "colorBorder": green[2],
-      
-    }
   }
 };

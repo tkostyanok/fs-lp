@@ -49,6 +49,6 @@ npm install @ant-design/colors
 ```
 
 Packages: 
-- [antd](https://www.npmjs.com/package/antd) - An enterprise-class UI design language and React UI library. 
+- [antd](https://www.npmjs.com/package/antd) - An enterprise-class UI design language and React UI library.
 - [@ant-design/icons](https://www.npmjs.com/package/@ant-design/icons) - Ant Design Icons for React.
 - [@ant-design/colors](https://www.npmjs.com/package/@ant-design/colors) - color palettes calculator of Ant Design

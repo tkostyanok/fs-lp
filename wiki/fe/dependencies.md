@@ -20,6 +20,7 @@
   - [lodash](https://lodash.com/) or [docs from npmjs](https://www.npmjs.com/package/lodash) - A modern JavaScript 
       utility library, which cover common manipulation programming for arrays, objects, string, and collections
       using functional programming paradigm.
+  - [lucide-react](https://lucide.dev/guide/packages/lucide-react) - Lucide icon library for React applications.
   - [react](https://react.dev/) - JavaScript library for creating user interfaces.
   - [react-dom](https://react.dev/) - React package for working with the DOM.
   - [uuid](https://github.com/uuidjs/uuid) - UUID generator

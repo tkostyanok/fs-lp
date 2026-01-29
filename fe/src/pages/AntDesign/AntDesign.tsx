@@ -1,14 +1,17 @@
 import { Outlet } from 'react-router';
 
 import {
-  ConfigProvider, Layout 
+  ConfigProvider, Layout
 } from 'antd';
-
-import { antTheme } from './styles/ant-theme';
-import { MainMenu } from './components';
+import {
+  MainHeader,
+  MainMenu 
+} from 'src/pages/AntDesign/components';
+import { WHITE } from 'src/pages/AntDesign/constants/colors';
+import { antTheme } from 'src/pages/AntDesign/styles/ant-theme';
 
 const {
-  Header, Content, Sider 
+  Content, Sider 
 } = Layout;
 
 export const AntDesign = () => {
@@ -21,7 +24,7 @@ export const AntDesign = () => {
       >
         <Sider
           style = {{
-            borderRight: `1px solid ${antTheme.token?.colorPrimaryBorder}`,
+            backgroundColor: WHITE
           }}
         >
           <MainMenu />
@@ -32,21 +35,15 @@ export const AntDesign = () => {
             padding: 0,
           }}
         >
-          <Header 
-            style={{ 
-              borderBottom: `1px solid ${antTheme.token?.colorPrimaryBorder}`,
-              height: 48,
-              padding: 0
-            }}
-          >
-            Header here 
-          </Header>
+          <MainHeader>
+            <>some header will be here</>
+          </MainHeader>
 
           <Content 
             style={{
               borderRadius: 0,
-              margin: '0 16px ',
-              padding: 0
+              margin: '24px ',
+              padding: '16px'
             }}
           >
             <Outlet />
