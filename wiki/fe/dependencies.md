@@ -1,6 +1,9 @@
 # Dependencies
 
 ## Main Dependencies
+
+  - [@ant-design/icons](https://www.npmjs.com/package/@ant-design/icons) - Ant Design Icons for React.
+  - [@ant-design/colors](https://www.npmjs.com/package/@ant-design/colors) - color palettes calculator  of Ant Design.
   - [@emotion/react](https://www.npmjs.com/package/@emotion/react) - Simple styling in React.
   - [@emotion/styled](https://www.npmjs.com/package/@emotion/styled) - styled API for emotion.
     -> [docs](https://emotion.sh/docs/introduction)
@@ -9,13 +12,15 @@
   - [@mui/icons-material]() - 
   - [@mui/joy]() - 
   - [@mui/material]() - 
-  - [@mui/x-data-grid]() - 
+  - [@mui/x-data-grid]() -
+  - [antd](https://ant.design/) - An enterprise-class UI design language and React UI library. 
   - [axios](https://axios-http.com/) - Promise based HTTP client for the browser and node.js.
   - [dotenv](https://www.npmjs.com/package/dotenv) - is a zero-dependency module that loads environment 
       variables from a `.env` file into process.env.
   - [lodash](https://lodash.com/) or [docs from npmjs](https://www.npmjs.com/package/lodash) - A modern JavaScript 
       utility library, which cover common manipulation programming for arrays, objects, string, and collections
       using functional programming paradigm.
+  - [lucide-react](https://lucide.dev/guide/packages/lucide-react) - Lucide icon library for React applications.
   - [react](https://react.dev/) - JavaScript library for creating user interfaces.
   - [react-dom](https://react.dev/) - React package for working with the DOM.
   - [uuid](https://github.com/uuidjs/uuid) - UUID generator
