@@ -1,0 +1,14 @@
+# Logs
+logs
+_.log
+.qodo
+npm-debug.log_
+yarn-debug.log*
+yarn-error.log*
+
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/

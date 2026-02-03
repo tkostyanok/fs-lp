@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import Box from '@mui/material/Box';
 import { ThemeProvider as MaterialTM } from '@mui/material/styles';
 
-import { DashboardMenu } from 'src/pages/MaterialUI/components/Organisms';
+import { MainMenu } from 'src/pages/MaterialUI/components/Organisms';
 import { MaterialUIProvider } from 'src/pages/MaterialUI/context';
 import { mockData } from 'src/pages/MaterialUI/data/mockData';
 import muiTheme from 'src/pages/MaterialUI/styles/mui-theme';
@@ -17,25 +17,25 @@ import muiTheme from 'src/pages/MaterialUI/styles/mui-theme';
 export const MaterialUI = () => {
   return (
     <MaterialTM theme={muiTheme}>
-      <Box
-        sx={{ 
-          display: 'flex',
-          width: '100%'
-        }}
-      >
-        <DashboardMenu />
+      <MaterialUIProvider initData={mockData}>
         <Box
-          component='main'
-          sx={{
-            flexGrow: 1,
-            width: '100%',
+          sx={{ 
+            display: 'flex',
+            width: '100%'
           }}
         >
-          <MaterialUIProvider initData={mockData}>
+          <MainMenu />
+          <Box
+            component='main'
+            sx={{
+              flexGrow: 1,
+              width: '100%',
+            }}
+          >
             <Outlet />
-          </MaterialUIProvider>
+          </Box>
         </Box>
-      </Box>
+      </MaterialUIProvider>
     </MaterialTM>
   );
 };

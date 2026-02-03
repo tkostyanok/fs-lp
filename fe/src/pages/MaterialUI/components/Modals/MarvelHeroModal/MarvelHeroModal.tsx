@@ -30,13 +30,9 @@ export const MarvelHeroModal = ({
   // TODO: Optimize with add translation
   const title = isNewHero ? 'Add New Hero' : 'Marvel Hero Details';
 
-  const [ heroFilterValues, setHeroFilterValues ] = useState<IMarvelHeroesDataTable>(data);
+  const [ heroValues, setHeroValues ] = useState<IMarvelHeroesDataTable>(data);
   const [ isDataChanged, setIsDataChanged ] = useState(false);
-
-  if (open && data && heroFilterValues.id !== data.id) {
-    setHeroFilterValues(data);
-  }
-
+ 
   const handleChange = (
     event: SyntheticEvent | ChangeEvent<HTMLInputElement> | (Event & { target: { value: unknown;
       name: string } }),
@@ -45,7 +41,7 @@ export const MarvelHeroModal = ({
     const name = target.name;
     const value = target.value;
 
-    setHeroFilterValues((prevValues: IMarvelHeroesDataTable) => ({
+    setHeroValues((prevValues: IMarvelHeroesDataTable) => ({
       ...prevValues,
       [name]: value,
     }));
@@ -55,9 +51,9 @@ export const MarvelHeroModal = ({
   const handleSubmit = async () => {
     const modifiedValues = isNewHero
       ? {
-        ...heroFilterValues,
+        ...heroValues,
       }
-      : getModificationsFromSimpleObjects(data, heroFilterValues);
+      : getModificationsFromSimpleObjects(data, heroValues);
 
     // If no changes detected, do not proceed
     if (isEmptyObject(modifiedValues)) {
@@ -89,7 +85,7 @@ export const MarvelHeroModal = ({
       />
       <DialogContent dividers>
         <MarvelHeroInfo
-          data={heroFilterValues}
+          data={heroValues}
           onChange={handleChange}
         />
       </DialogContent>

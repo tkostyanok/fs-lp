@@ -5,9 +5,9 @@ import {
   render, screen, waitFor 
 } from '@testing-library/react';
 
-import { BasicInput } from './BasicInput';
-
 import '@testing-library/jest-dom';
+
+import { BasicInput } from './BasicInput';
 
 /**
  * BasicInput component based on MUI's TextField component.

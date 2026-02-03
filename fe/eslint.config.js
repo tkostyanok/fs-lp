@@ -82,22 +82,32 @@ export default defineConfig([
           'groups': [
             // `react` and `react-dom` are always imported first.
             ['^react'],
+            
             // Packages starting with `@mui/*`
             ['^@mui/material', '@mui/x-data-grid', '^@mui/system', '^@mui/icons-material' ],
-            // Packages starting with a character, with `@` and with `~`
+
+            // Packages starting with `antd`, `@ant-design/*`
+            ['^antd', '@ant-design/' ],
+
+            // Packages starting with a character, with `@`, with `~`, with `_`
             // Note: test '(?!src\/(?:\/|$))' excludes imports starting with `src/`
-            ['^[a-z](?!src\/(?:\/|$))', '^@', '^~'],
+            ['^[a-z](?!src\/(?:\/|$))', '^@', '^~', '^@?\\w'],
             // ['^[a-z]', '^@', '^~'],
+
+            // Side effect imports
+            ['^\\u0000'],
+
             // Imports starting with `src`
             ['src$', ],
+            
             // Imports starting with `../`
             ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+            
             // Imports starting with `./`
             ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+
             // Style imports
-            ['^.+\\.s?css$'],
-            // Side effect imports
-            ['^\\u0000']
+            ['^.+\\.s?css$'],            
           ]  
         }
       ],

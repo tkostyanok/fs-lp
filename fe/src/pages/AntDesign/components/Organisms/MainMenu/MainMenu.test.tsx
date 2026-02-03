@@ -8,9 +8,9 @@ import {
   waitFor
 } from '@testing-library/react';
 
-import { MainMenu } from './MainMenu';
-
 import '@testing-library/jest-dom';
+
+import { MainMenu } from './MainMenu';
 
 /**
  * MainMenu component based on AntDesign Menu component.

@@ -46,6 +46,7 @@ export const MarvelHeroesFiltersModal = ({
     name: 'Name',
     gender: 'Gender',
     citizenship: 'Citizenship',
+    id: 'ID',
     skills: 'Skills',
     occupation: 'Occupation',
     memberOf: 'Member of',

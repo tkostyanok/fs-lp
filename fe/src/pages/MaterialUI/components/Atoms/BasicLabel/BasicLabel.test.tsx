@@ -5,9 +5,9 @@ import {
   render, screen 
 } from '@testing-library/react';
 
-import { BasicLabel } from './BasicLabel';
-
 import '@testing-library/jest-dom';
+
+import { BasicLabel } from './BasicLabel';
 
 /**
  * BasicLabel component based on MUI's Typography component.

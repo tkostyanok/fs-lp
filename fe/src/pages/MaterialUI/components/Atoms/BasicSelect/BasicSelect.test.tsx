@@ -5,9 +5,9 @@ import {
   fireEvent, render, screen 
 } from '@testing-library/react';
 
-import { BasicSelect } from './BasicSelect';
-
 import '@testing-library/jest-dom';
+
+import { BasicSelect } from './BasicSelect';
 
 const OPTIONS = [
   {

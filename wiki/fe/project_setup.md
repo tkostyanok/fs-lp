@@ -1,4 +1,4 @@
-# Installation guide
+# Setup guide
 
 ## 1. Git initialization
 
@@ -539,3 +539,54 @@ function SortedList({ items }) {
 ### Is Lodash Needed in app?
 
 It depends. It's true that many features `lodash` offers are now available in native JavaScript, but at the same time `lodash` still provides a consistent and well-tested suite of utility functions that can be more readable and sometimes more performant than their native counterparts.
+
+
+
+## 13. `Axios` and JSON Server
+
+### JSON Server
+
+`JSON Server` can be used during development for testing.
+
+### How to use
+
+Create file `file_name.json` with data.
+
+Use directly, without any extra package installation:
+
+
+```
+npx json-server --port 3001 file_name.json
+```
+
+**OR** install `json-server` as a development dependency:
+
+```
+npm install -D json-server
+```
+
+and add command to `package.json`:
+
+```
+{
+  // ... 
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server": "json-server -p 3001 file_name.json"  
+},
+}
+```
+ 
+
+### `Axios`
+
+`Axios` is a promise based HTTP client for the browser and node.js.
+
+### Install `axios`
+
+```
+npm install axios
+```

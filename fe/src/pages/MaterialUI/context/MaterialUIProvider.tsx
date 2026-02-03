@@ -4,11 +4,11 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState 
+  useState
 } from 'react';
 
-import { DeleteHeroButton } from 'src/pages/MaterialUI/components';
-import type { 
+import apiMaterialUI from 'src/api/apiMaterialUI';
+import type {
   DataUsage,
   Gender,
   IMarvelHeroesData,
@@ -21,7 +21,7 @@ import { v4 } from 'uuid';
 import { MaterialUIContext } from './MaterialUIContext';
 import {
   initialFiltersData,
-  initialMarvelHero 
+  initialMarvelHero
 } from './utils';
 
 interface IMaterialUIProviderProps {
@@ -32,7 +32,8 @@ interface IMaterialUIProviderProps {
 export const MaterialUIProvider = ({
   children, initData 
 }: IMaterialUIProviderProps) => {
-  const prevInitDataRef = useRef<string | null>(null);
+  // Save local data for session until it will not be reloaded.
+  const prevLocalDataRef = useRef<string | null>(null);
   const prevDataUsageRef = useRef<DataUsage>('local');
 
   /** *******************************  State Variables  **************************************** */
@@ -44,6 +45,76 @@ export const MaterialUIProvider = ({
   const [ selectedData, setSelectedData ] = useState<IMarvelHeroesDataTable | null>(null);
 
 
+  /** ************************  Initialization and Effects  ************************************ */
+
+  // Set initial data, if data usage is 'local'
+  useEffect(() => {
+    if (dataUsage === 'local') {
+      return setData((prevData) => {
+        // Check if previous data exist and it is identical to current data.
+        const currentDataJson = JSON.stringify(prevData);
+
+        if (prevLocalDataRef.current) {
+          if (prevLocalDataRef.current === currentDataJson) {
+            return prevData;
+          } else {
+            return JSON.parse(prevLocalDataRef.current);
+          }
+        }
+
+        // Clear data if initData is empty
+        if (!initData || initData?.length === 0) {
+          return [];
+        }
+
+        // Set new data
+        const tableData: IMarvelHeroesDataTable[] = initData.map((item: IMarvelHeroesData) => {
+          const heroID = v4();
+  
+          return {
+            ...item,
+            id: heroID,
+            canDelete: true,
+            canEdit: true,
+          };
+        });
+  
+        return tableData;
+      });
+    }
+  }, [ dataUsage, initData, prevLocalDataRef ]);
+
+  // Set initial data if data usage id 'remote'
+  useEffect(() => {
+    if (dataUsage === 'remote') {
+      apiMaterialUI
+        .getAllHeroes()
+        .then((fetchedData: Omit<IMarvelHeroesDataTable, 'canDelete' | 'canEdit'>[]) => {
+          // Clear data if fetchedData is empty
+          if (!fetchedData || fetchedData.length === 0) {
+            setData([]);
+            return;
+          }
+
+          const tableData: IMarvelHeroesDataTable[] = fetchedData.map(
+            (hero: Omit<IMarvelHeroesDataTable, 'canDelete' | 'canEdit'>) => ({
+              ...hero,
+              canDelete: true,
+              canEdit: true,
+            }),
+          );
+          setData(tableData);
+        })
+        .catch((error: unknown) => {
+          console.error('Error fetching remote data:', error);
+          // TODO: show notification
+          setData([]);
+        });
+    }
+  }, [ dataUsage, initData ]);
+
+
+
   /** *********************************  Functions  ******************************************** */
 
   // Delete data locally
@@ -52,6 +123,17 @@ export const MaterialUIProvider = ({
   }, []);
 
   // Delete data remotely
+  const handleDeleteDataRemote = useCallback(async (dataToDelete: IMarvelHeroesDataTable) => {
+    await apiMaterialUI
+      .deleteHero(dataToDelete.id as string)
+      .then(() => {
+        setData((prevData) => prevData.filter((item) => item.id !== dataToDelete.id));
+      })
+      .catch((error: unknown) => {
+        console.error('Error deleting hero remotely:', error);
+        // TODO: show notification
+      });
+  }, []);
 
   // Delete filter value
   const handleDeleteFilter = useCallback((filter: keyof MarvelHeroFilterValues, value: string) => {
@@ -61,32 +143,24 @@ export const MaterialUIProvider = ({
     }));
   }, []);
 
+  const handleDeleteData = useMemo(() => {
+    return  dataUsage === 'local' ? handleDeleteDataLocal : handleDeleteDataRemote;
+  }, [ dataUsage, handleDeleteDataLocal, handleDeleteDataRemote ]);
+
   // Create or Update data locally
   const handleSaveDataLocal = useCallback(
     (dataToSave: Partial<IMarvelHeroesDataTable>) => {
       setData((prevData) => {
-        const newHeroData: IMarvelHeroesDataTable | null =
-          dataToSave.id === null
+        const newHeroTableData: IMarvelHeroesDataTable | null =
+          dataToSave?.id === null
             ? ({
               ...dataToSave,
-              actions: null,
+              canDelete: true,
+              canEdit: true,
               id: v4(),
-            } as IMarvelHeroesDataTable)
+            }) as IMarvelHeroesDataTable
             : null;
-
-        const newHeroTableData: IMarvelHeroesDataTable | null =
-          newHeroData !== null
-            ? {
-              ...newHeroData,
-              actions: (
-                <DeleteHeroButton
-                  dataToDelete={newHeroData}
-                  onDelete={() => handleDeleteDataLocal(newHeroData)}
-                />
-              ),
-            }
-            : null;
-
+        
         if (newHeroTableData !== null) {
           return [ newHeroTableData, ...prevData ];
         }
@@ -101,15 +175,75 @@ export const MaterialUIProvider = ({
         );
       });
     },
-    [ handleDeleteDataLocal ],
+    [],
   );
 
   // Create or Update data remotely
-  const handleSaveDataRemote = async () => {
-    console.log('Some code will be implemented here for remote data saving');
-  };
+  const handleSaveDataRemote = useCallback(
+    async (dataToSave: Partial<IMarvelHeroesDataTable>) => {
+      const newORupdateHeroData: IMarvelHeroesDataTable | null =
+        dataToSave.id === null
+          ? await apiMaterialUI
+            .createHero({
+              ...dataToSave,
+            } as IMarvelHeroesData)
+            .then((createdHero: Omit<IMarvelHeroesDataTable, 'canDelete' | 'canEdit'>) => {
+              return {
+                ...createdHero,
+              } as IMarvelHeroesDataTable;
+            })
+            .catch((error: unknown) => {
+              console.error('Error creating hero remotely:', error);
+              // TODO: show notification
+              return null;
+            })
+          : await apiMaterialUI
+            .updateHero(dataToSave.id as string, dataToSave)
+            .then((updatedHero: Omit<IMarvelHeroesDataTable, 'canDelete' | 'canEdit'>) => {
+              return {
+                ...updatedHero,
+              } as IMarvelHeroesDataTable;
+            })
+            .catch((error: unknown) => {
+              console.error('Error updating hero remotely:', error);
+              // TODO: show notification
+              return null;
+            });
+
+      const newOrUpdateHeroTableData: IMarvelHeroesDataTable | null =
+        newORupdateHeroData !== null
+          ? {
+            ...newORupdateHeroData,
+            canDelete: true,
+            canEdit: true,
+          }
+          : null;
+
+      return setData((prevData) => {
+        return dataToSave?.id === null
+          ? newOrUpdateHeroTableData
+            ? [ newOrUpdateHeroTableData, ...prevData ]
+            : prevData
+          : prevData.map((item) =>
+            item.id === dataToSave.id
+              ? {
+                ...item,
+                ...dataToSave,
+              }
+              : item,
+          );
+      });
+    },
+    [],
+  );
+
+  const handleSaveData = useMemo(() => {
+    return dataUsage === 'local' ? handleSaveDataLocal : handleSaveDataRemote;
+  }, [ dataUsage, handleSaveDataLocal, handleSaveDataRemote ]);
 
   // Filter data based on current filters
+  // TODO: divide filters for local and remote 
+  // TODO: filtering remote data in BE
   const {
     filteredData,
     hasFilters 
@@ -137,71 +271,33 @@ export const MaterialUIProvider = ({
     };
   }, [ data, filters ]);
 
-  // Set Data Usage change effect and reset filters
+  // Update DataUsageRef and reset filters
   const setDataUsageAndResetFilters = useCallback(
     (dataUsage: DataUsage) => {
       if (prevDataUsageRef.current !== dataUsage) {
         setFilters(initialFiltersData);
         prevDataUsageRef.current = dataUsage;
       }
+      // Store current local data ref for the session
+      if (dataUsage === 'remote') {
+        prevLocalDataRef.current = JSON.stringify(data);
+      }
       setDataUsage(dataUsage);
     },
-    [ setFilters ],
+    [ data, setFilters ],
   );
 
-  /** ************************  Initialization and Effects  ************************************ */
-
-  // Set initial data, if data usage is 'local'
-  useEffect(() => {
-    if (dataUsage === 'local') {
-      console.log('Setting initial local data:', initData);
-      return setData((prevData) => {
-        // Skip if current data identical to previous data
-        const currentDataJson = JSON.stringify(initData ?? []);
-        if (prevInitDataRef.current === currentDataJson) return prevData;
-
-        // Update ref
-        prevInitDataRef.current = currentDataJson;
-
-        // Clear data if initData is empty
-        if (!initData || initData?.length === 0) {
-          return prevData.length !== initData?.length ? [] : prevData;
-        }
-
-        // Set new data
-        return initData.map((item: IMarvelHeroesData) => {
-          const hero = {
-            ...item,
-            actions: null,
-            id: v4(), // Ensure unique IDs,
-          };
-          return {
-            ...hero,
-            actions: (
-              <DeleteHeroButton
-                dataToDelete={hero}
-                id={`${hero.id}-delete-button`}
-                onDelete={() => handleDeleteDataLocal(hero)}
-              />
-            ),
-          };
-        });
-      });
-    }
-  }, [ dataUsage, initData, handleDeleteDataLocal ]);
-
-  // Set initial data if data usage id 'remote'
-
   console.log('CURRENT DATA', data);
+  console.log('dataUsage', dataUsage);
 
   const contextValue = {
     data,
     dataUsage,
     filteredData,
     filters,
+    handleDeleteData,
     handleDeleteFilter,
-    handleSaveDataLocal,
-    handleSaveDataRemote,
+    handleSaveData,
     hasFilters,
     initialFiltersData,
     initialMarvelHero,

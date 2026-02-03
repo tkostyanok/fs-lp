@@ -1,0 +1,32 @@
+{
+  "name": "fs-lp-be",
+  "version": "0.0.1",
+  "description": "BE part for fs-lp (full stack - learning project)",
+  "keywords": [
+    "Node.js",
+    "Express"
+  ],
+  "homepage": "https://github.com/tkostyanok/fs-lp#readme",
+  "bugs": {
+    "url": "https://github.com/tkostyanok/fs-lp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkostyanok/fs-lp.git"
+  },
+
+  "license": "MIT",
+  "author": "Tatiana Kostyanok",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
+  }
+}

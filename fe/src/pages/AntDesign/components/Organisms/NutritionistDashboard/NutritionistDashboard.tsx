@@ -3,15 +3,16 @@ import { Link } from 'react-router';
 import {
   Col, Row
 } from 'antd';
+import {
+  EuroOutlined, IssuesCloseOutlined, ScheduleOutlined, TeamOutlined
+} from '@ant-design/icons';
+
 import { MoveRight } from 'lucide-react';
 import {
   ERROR_COLOR,
   PRIMARY_COLOR, SUCCESS_COLOR,
   WARNING_COLOR
 } from 'src/pages/AntDesign/constants/colors';
-import {
-  EuroOutlined, IssuesCloseOutlined, ScheduleOutlined, TeamOutlined
-} from '@ant-design/icons';
 
 import { InfoCard } from '../../Molecules';
 

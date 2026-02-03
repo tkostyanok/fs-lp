@@ -8,17 +8,19 @@ export const initialFiltersData: MarvelHeroFilterValues = {
   citizenship: [],
   creator: [],
   gender: [],
+  id: [],
   memberOf: [],
   occupation: [],
   skills: [],
 };
 
 export const initialMarvelHero: IMarvelHeroesDataTable = {
-  actions: null,
+  canDelete: null,
+  canEdit: null,
   citizenship: null,
   creator: null,
-  id: null,
   gender: null,
+  id: null,
   memberOf: null,
   name: null,
   occupation: null,
