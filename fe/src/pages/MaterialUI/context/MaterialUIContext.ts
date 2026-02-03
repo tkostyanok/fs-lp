@@ -22,15 +22,17 @@ interface IMaterialUIContext {
   dataUsage: DataUsage;
   filteredData: IMarvelHeroesDataTable[];
   filters: MarvelHeroFilterValues;
+  /**
+   * Function calls to delete data.
+   * @param dataToDelete 
+   * @returns 
+   */
+  handleDeleteData: (dataToDelete: IMarvelHeroesDataTable) => void | Promise<void>;
   handleDeleteFilter: (filter: keyof MarvelHeroFilterValues, value: string) => void;
   /**
-   * Function calls to save data locally
+   * Function calls to save data.
    */
-  handleSaveDataLocal: (dataToSave: Partial<IMarvelHeroesDataTable>) => void;
-  /**
-   * Function calls to save data remotely
-   */
-  handleSaveDataRemote: (dataToSave: Partial<IMarvelHeroesDataTable>) => Promise<void>;
+  handleSaveData: (dataToSave: Partial<IMarvelHeroesDataTable>) => void | Promise<void>;
   hasFilters: boolean;
   initialFiltersData: MarvelHeroFilterValues;
   initialMarvelHero: IMarvelHeroesDataTable;
@@ -47,9 +49,9 @@ export const MaterialUIContext = createContext<IMaterialUIContext>({
   dataUsage: 'local',
   filteredData: [],
   filters: initialFiltersData,
+  handleDeleteData: () => {},
   handleDeleteFilter: () => {},
-  handleSaveDataLocal: () => {},
-  handleSaveDataRemote: async () => {},
+  handleSaveData: () => {},
   hasFilters: false,
   initialFiltersData,
   initialMarvelHero,

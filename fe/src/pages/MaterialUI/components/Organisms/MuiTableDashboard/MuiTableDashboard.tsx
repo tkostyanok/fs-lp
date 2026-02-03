@@ -17,18 +17,18 @@ import { TopToolbar } from 'src/pages/MaterialUI/components/Molecules';
 import { MuiTable } from 'src/pages/MaterialUI/components/Organisms/MuiTable';
 import { useMaterialUIContext } from 'src/pages/MaterialUI/context';
 import type { IMarvelHeroesDataTable } from 'src/pages/MaterialUI/interfaces';
+import { v4 } from 'uuid';
 
 import { headerCells } from './utils';
 
 export const MuiTableDashboard = () => {
   const {
     data,
-    // dataUsage,
     filters,
     filteredData,
+    handleDeleteData,
     handleDeleteFilter,
-    handleSaveDataLocal,
-    // handleSaveDataRemote,
+    handleSaveData,
     hasFilters,
     initialMarvelHero,
     isModalOpen,
@@ -70,10 +70,7 @@ export const MuiTableDashboard = () => {
     },
     [ setSelectedData, setIsNewHero, setIsModalOpen ],
   );
-  
-  console.log('MuiTableDashboard openFiltersModal', openFiltersModal);
-  console.log('MuiTableTab render', data, data?.length, filteredData, filteredData?.length, hasFilters);
-  
+
   return (
     <>
       <TopToolbar>
@@ -94,6 +91,7 @@ export const MuiTableDashboard = () => {
       </TopToolbar>
       <MuiTable<IMarvelHeroesDataTable>
         headerCells={_headerCells}
+        onDelete={handleDeleteData}
         onFilterClick={setOpenFiltersModal}
         onFilterDelete={handleDeleteFilter as (filter: keyof IMarvelHeroesDataTable, value: string) => void}
         onRowClick={handleRowClick}
@@ -102,9 +100,10 @@ export const MuiTableDashboard = () => {
       <MarvelHeroModal
         data={selectedData || initialMarvelHero}
         isNewHero={isNewHero}
+        // Note: use key to force remount when selectedData or isNewHero changes
+        key={selectedData?.id || `new-hero-${v4()}`}
         onClose={handleCloseModal}
-        // onSave={dataUsage === 'local' ? handleSaveDataLocal : handleSaveDataRemote} // TODO: add data usage
-        onSave={handleSaveDataLocal}
+        onSave={handleSaveData}
         open={isModalOpen}
       />
       <MarvelHeroesFiltersModal

@@ -8,9 +8,9 @@ import {
   waitFor
 } from '@testing-library/react';
 
-import { InfoCard } from './InfoCard';
-
 import '@testing-library/jest-dom';
+
+import { InfoCard } from './InfoCard';
 
 // A simple fake icon component to use for testing
 const FakeIcon: React.FC = () => <svg data-testid='fake-icon' />;

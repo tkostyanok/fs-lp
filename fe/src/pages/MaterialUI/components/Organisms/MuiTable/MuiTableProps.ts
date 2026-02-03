@@ -6,6 +6,14 @@ export interface  MuiTableProps<T extends object> {
    */
   headerCells: readonly MuiTableHeaderCell<T>[];
   /**
+   * Callback fired when delete button is clicked.
+   */
+  onDelete?: (dataToDelete: T) => void;
+  /**
+   * Callback fired when edit button is clicked.
+   */
+  onEdit?: (dataToEdit: T) => void;
+  /**
    * Callback fired when a filter icon in a header cell is clicked.
    */
   onFilterClick?: (value: boolean | ((prevState: boolean) => boolean)) => void;

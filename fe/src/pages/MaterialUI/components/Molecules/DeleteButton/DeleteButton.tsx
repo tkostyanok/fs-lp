@@ -6,13 +6,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { ConfirmationModal } from 'src/pages/MaterialUI/components/Modals';
 
-import type { DeleteHeroButtonProps } from './DeleteHeroButtonProps';
+import type { DeleteButtonProps } from './DeleteButtonProps';
 
-export const DeleteHeroButton = ({
+/**
+ * DeleteButton uses in Table to delete hero.
+ */
+export const DeleteButton = <T extends object>({
   dataToDelete,
   onDelete,
   ...props
-}: DeleteHeroButtonProps & IconButtonProps) => {
+}: DeleteButtonProps<T> & IconButtonProps) => {
   const [ openConfirmationModal, setOpenConfirmationModal ] = useState(false);
   
   const handleOpenConfirmationModal = () => {

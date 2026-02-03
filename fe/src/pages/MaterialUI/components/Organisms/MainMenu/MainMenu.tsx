@@ -10,11 +10,12 @@ import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 
 import { PRIMARY_BACKGROUND_COLOR } from 'src/pages/MaterialUI//constants/colors';
+import { DataUsage } from 'src/pages/MaterialUI/components/Atoms';
 import { MenuListItem } from 'src/pages/MaterialUI/components/Molecules/MenuListItem';
 
 const DRAWER_WIDTH = 200;
 
-export const DashboardMenu = () => {
+export const MainMenu = () => {
   return (
     <Drawer
       variant='permanent'
@@ -72,6 +73,22 @@ export const DashboardMenu = () => {
             to='/material-ui/chat'
           />
         </List>
+      </Box>
+      <Box
+        sx={{
+          alignItems: 'center',
+          backgroundColor: PRIMARY_BACKGROUND_COLOR,
+          bottom: '0.5rem',
+          display: 'block',
+          height: '4.5rem',
+          justifyContent: 'center',
+          overflow: 'auto',
+          position: 'absolute',
+          width: '100%'
+        }}
+      >
+        <Divider />
+        <DataUsage />
       </Box>
     </Drawer>
 

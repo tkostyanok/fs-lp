@@ -14,6 +14,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+import { DeleteButton } from 'src/pages/MaterialUI/components/Molecules';
 import {
   GREY_50, GREY_200, GREY_600 
 } from 'src/pages/MaterialUI/constants/colors';
@@ -28,6 +29,7 @@ import { getComparator } from './utils';
  */
 export const MuiTable = <T extends object>({
   headerCells,
+  onDelete,
   onFilterClick,
   onFilterDelete,
   onRowClick,
@@ -144,8 +146,8 @@ export const MuiTable = <T extends object>({
                               whiteSpace: 'nowrap',
                             }}
                           >
-                            {
-                              (() => {
+                            {(key !== 'actions') 
+                              ? (() => {
                                 const cellValue = rowData[key as keyof T];
                                 if (cellValue === null || cellValue === undefined) return '-';
                                 if (typeof cellValue === 'string' || typeof cellValue === 'number') {
@@ -154,6 +156,14 @@ export const MuiTable = <T extends object>({
                                 // Only allow ReactNodes explicitly passed by the caller; avoid HTML strings
                                 return (cellValue as React.ReactNode) ?? '-';
                               })()
+                              : (
+                                // TODO: Add edit button
+                                <DeleteButton
+                                  dataToDelete={rowData}
+                                  id={`${rowData['id' as keyof T]}-delete-button`}
+                                  onDelete={onDelete ? onDelete : () => {}}
+                                />
+                              )
                             }
                           </TableCell>
                         );

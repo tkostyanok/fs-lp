@@ -7,16 +7,17 @@ export type MarvelHeroFilterValues = {
 };
 
 export interface IMarvelHeroesData {
-  name: string | null;
   citizenship: string | null;
   creator: string | null;
   gender: Gender | null;
+  id: string | null;
+  name: string | null;
   memberOf: string | null;
   occupation: string | null;
   skills: string | null;
 }
 
 export interface IMarvelHeroesDataTable extends IMarvelHeroesData {
-  actions: React.ReactNode | null;
-  id: string | null;
+  canDelete: boolean | null;
+  canEdit?: boolean | null;
 }
