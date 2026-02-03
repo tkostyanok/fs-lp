@@ -18,9 +18,24 @@ let heroes = JSONData.map(hero => {
 
 // Create an Express application 
 const app = express()
+app.disable('x-powered-by')
 
-// Enable CORS for all routes
-app.use(cors())
+// Enable CORS for allowed localhost origins only
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow non-browser clients (curl, Postman) when origin is undefined
+    if (!origin) return callback(null, true);
+    return allowedOrigins.includes(origin)
+      ? callback(null, true)
+      : callback(new Error('CORS not allowed by server'));
+  },
+  credentials: true,
+}));
 
 // Middleware to parse JSON bodies
 /**
